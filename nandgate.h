@@ -17,7 +17,7 @@ SC_MODULE(gate)
     
 
     // Constructor
-    SC_CTOR(gate) : A("A"), B("B"), C("C"),or_result("or_result")
+    SC_CTOR(gate) : A("A"), B("B"), C("C"),D("D"),or_result("or_result")
     {
         // Define AND gate behavior
         SC_METHOD(do_and);
