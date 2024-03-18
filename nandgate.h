@@ -13,6 +13,7 @@ SC_MODULE(gate)
 
     // Internal signals for intermediate results
     sc_signal<bool> or_result;
+    sc_signal<bool> C;
     
 
     // Constructor
