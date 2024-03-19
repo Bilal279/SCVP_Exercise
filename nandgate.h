@@ -1,44 +1,23 @@
-#ifndef GATE_H
-#define GATE_H
+#ifndef NAND_H
+#define NAND_H
 
 #include <systemc.h>
 
-SC_MODULE(gate)
+SC_MODULE(nand)
 {
-    // Inputs and Outputs for the gates
     sc_in<bool> A;
     sc_in<bool> B;
-    sc_out<bool> D;  
-    
+    sc_out<bool> Z;
 
-    // Internal signals for intermediate results
-    sc_signal<bool> or_result;
-    sc_signal<bool> C;
-    
-
-    // Constructor
-    SC_CTOR(gate) : A("A"), B("B"), C("C"),D("D"),or_result("or_result")
+    SC_CTOR(nand) : A("A"), B("B"), Z("Z")
     {
-        // Define AND gate behavior
-        SC_METHOD(do_and);
-        sensitive << D << B;
-
-        // Define OR gate behavior
-        SC_METHOD(do_or);
-        sensitive << and_result << A;
+        SC_METHOD(do_nand);
+        sensitive << A << B;
     }
 
-    // AND gate behavior
-    void do_and()
+    void do_nand()
     {
-        C.write(and_result.read() && !A.read()); // Output of the AND gate feeds into the OR gate
-        D = C;
-    }
-
-    // OR gate behavior
-    void do_or()
-    {
-        or_result.write(C.read() || B.read());
+        Z.write(!(A.read() && B.read())); // Nand Gate
     }
 };
 
